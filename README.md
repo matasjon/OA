@@ -1,1 +1,0 @@
-# STPP-projektas
