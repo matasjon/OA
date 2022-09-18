@@ -131,5 +131,5 @@ Serverio pusė (angl. Back-End) – naudojant Python Django. Duomenų bazė – 
 
 1 pav. pavaizduota kuriamos sistemos diegimo diagrama. Sistemos talpinimui yra naudojamas Azure serveris. Kiekviena sistemos dalis yra diegiama tame pačiame serveryje. Internetinė aplikacija yra pasiekiama per HTTP protokolą. Šios sistemos veikimui (pvz., duomenų manipuliavimui su duomenų baze) yra reikalingas OnActs API. Pats Pharma API vykdo duomenų mainus su duomenų baze - tam naudojama ORM sąsaja.
 
-![Alt text](img.png?raw=true "img.png")
+![1 pav.](img.png?raw=true "1 pav.")
 
