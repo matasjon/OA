@@ -1,6 +1,4 @@
 ﻿namespace OnAct.Data.Dtos.Activities
 {
-    public class CreateActivityDto
-    {
-    }
+    public record CreateActivityDto(string Name, string Description);
 }
