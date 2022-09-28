@@ -8,6 +8,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllers();
 //rep
 builder.Services.AddTransient<IActivitiesRepository, ActivitiesRepository>();
+builder.Services.AddTransient<IPlacesRepository, PlacesRepository>();
 
 var app = builder.Build();
 

@@ -12,8 +12,8 @@ using OnAct.Data;
 namespace OnAct.Migrations
 {
     [DbContext(typeof(OnActContext))]
-    [Migration("20220928105340_update1")]
-    partial class update1
+    [Migration("20220928175241_update2")]
+    partial class update2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,13 +112,29 @@ namespace OnAct.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("CreationTimeUt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ActivityId");
+
                     b.ToTable("Places");
+                });
+
+            modelBuilder.Entity("OnAct.Data.Entities.Place", b =>
+                {
+                    b.HasOne("OnAct.Data.Entities.Activity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activity");
                 });
 #pragma warning restore 612, 618
         }

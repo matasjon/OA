@@ -31,11 +31,7 @@ namespace OnAct.Controllers
         public async Task<ActionResult<ActivityDto>> Get(int id)
         {
             var activity = await _activitiesRepository.Get(id);
-
-            if (activity == null)
-            {
-                return NotFound($"Activity with id '{id}' not found.");
-            }
+            if (activity == null) return NotFound($"Activity with id '{id}' not found.");
 
             return Ok(_mapper.Map<ActivityDto>(activity));
         }
@@ -43,8 +39,8 @@ namespace OnAct.Controllers
         [HttpPost]
         public async Task<ActionResult<ActivityDto>> Post(CreateActivityDto activityDto)
         {
-
             var activity = _mapper.Map<Activity>(activityDto);
+            activity.CreationTimeUt = DateTime.UtcNow;
 
             await _activitiesRepository.Create(activity);
 
@@ -56,20 +52,14 @@ namespace OnAct.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<ActivityDto>> Put(int id, UpdateActivityDto activityDto)
         {
-
             var activity = await _activitiesRepository.Get(id);
-
-            if (activity == null)
-            {
-                return NotFound($"Activity with id '{id}' not found.");
-            }
+            if (activity == null) return NotFound($"Activity with id '{id}' not found.");
 
             //Pirmas budas dedi
             //topic.Name = topicDto.Name;
 
             //Antras budas
             _mapper.Map(activityDto, activity);
-
 
             await _activitiesRepository.Put(activity);
 
@@ -80,13 +70,8 @@ namespace OnAct.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<ActivityDto>> Delete(int id)
         {
-
             var activity = await _activitiesRepository.Get(id);
-
-            if (activity == null)
-            {
-                return NotFound($"Activity with id '{id}' not found.");
-            }
+            if (activity == null) return NotFound($"Activity with id '{id}' not found.");
 
             await _activitiesRepository.Delete(activity);
 

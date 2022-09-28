@@ -1,6 +1,4 @@
 ﻿namespace OnAct.Data.Dtos.Places
 {
-    public class CreatePlaceDto
-    {
-    }
+    public record CreatePlaceDto(string Name, string City, string Address);
 }

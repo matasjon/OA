@@ -1,6 +1,4 @@
 ﻿namespace OnAct.Data.Dtos.Places
 {
-    public class UpdatePlaceDto
-    {
-    }
+    public record UpdatePlaceDto(string Name, string City, string Address);
 }

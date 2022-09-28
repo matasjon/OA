@@ -6,8 +6,9 @@
         public string Name { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
+        public DateTime CreationTimeUt { get; set; }
 
         public int ActivityId { get; set; }
-        //public Activity Activity { get; set; }
+        public Activity Activity { get; set; }
     }
 }

@@ -1,6 +1,4 @@
 ﻿namespace OnAct.Data.Dtos.Places
 {
-    public class PlaceDto
-    {
-    }
+    public record PlaceDto(int Id, string Name, string City, string Address);
 }
