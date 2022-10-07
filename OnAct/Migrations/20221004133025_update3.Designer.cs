@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OnAct.Data;
@@ -11,9 +12,10 @@ using OnAct.Data;
 namespace OnAct.Migrations
 {
     [DbContext(typeof(OnActContext))]
-    partial class OnActContextModelSnapshot : ModelSnapshot
+    [Migration("20221004133025_update3")]
+    partial class update3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,10 +93,6 @@ namespace OnAct.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ActivityId");
-
-                    b.HasIndex("PlaceId");
-
                     b.ToTable("Groups");
                 });
 
@@ -129,25 +127,6 @@ namespace OnAct.Migrations
                     b.HasIndex("ActivityId");
 
                     b.ToTable("Places");
-                });
-
-            modelBuilder.Entity("OnAct.Data.Entities.Group", b =>
-                {
-                    b.HasOne("OnAct.Data.Entities.Activity", "Activity")
-                        .WithMany()
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OnAct.Data.Entities.Place", "Place")
-                        .WithMany()
-                        .HasForeignKey("PlaceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Activity");
-
-                    b.Navigation("Place");
                 });
 
             modelBuilder.Entity("OnAct.Data.Entities.Place", b =>

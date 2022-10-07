@@ -1,6 +1,4 @@
 ﻿namespace OnAct.Data.Dtos.Groups
 {
-    public class UpdateGroupDto
-    {
-    }
+    public record UpdateGroupDto(string Name, string Description, string[] StartTimes, string[] EndTimes, int[] Days, bool IsFull);
 }

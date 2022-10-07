@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 //rep
 builder.Services.AddTransient<IActivitiesRepository, ActivitiesRepository>();
 builder.Services.AddTransient<IPlacesRepository, PlacesRepository>();
+builder.Services.AddTransient<IGroupsRepository, GroupsRepository>();
 
 var app = builder.Build();
 

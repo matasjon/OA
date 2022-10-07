@@ -1,6 +1,5 @@
 ﻿namespace OnAct.Data.Dtos.Groups
 {
-    public class CreateGroupDto
-    {
-    }
+    public record CreateGroupDto (string Name, string Description, string[] StartTimes, string[] EndTimes, int[] Days, bool IsFull);
+
 }
