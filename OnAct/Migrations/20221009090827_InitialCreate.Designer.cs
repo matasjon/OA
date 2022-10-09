@@ -12,8 +12,8 @@ using OnAct.Data;
 namespace OnAct.Migrations
 {
     [DbContext(typeof(OnActContext))]
-    [Migration("20221004133025_update3")]
-    partial class update3
+    [Migration("20221009090827_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,6 +93,10 @@ namespace OnAct.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("PlaceId");
+
                     b.ToTable("Groups");
                 });
 
@@ -127,6 +131,25 @@ namespace OnAct.Migrations
                     b.HasIndex("ActivityId");
 
                     b.ToTable("Places");
+                });
+
+            modelBuilder.Entity("OnAct.Data.Entities.Group", b =>
+                {
+                    b.HasOne("OnAct.Data.Entities.Activity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnAct.Data.Entities.Place", "Place")
+                        .WithMany()
+                        .HasForeignKey("PlaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("Place");
                 });
 
             modelBuilder.Entity("OnAct.Data.Entities.Place", b =>
