@@ -118,9 +118,9 @@ Sistemos administratrius mato visų užsiėmimų sąrašą, gali pridėti ir pa�
 ### Sistemos sudedamosios dalys:
 Kliento pusė (ang. Front-End) – naudojant React.
 
-Serverio pusė (angl. Back-End) – naudojant Python, Django. 
+Serverio pusė (angl. Back-End) – naudojant C# .NET. 
 
-Duomenų bazė – MySQL.
+Duomenų bazė – PostgreSQL.
 
 ## Sistemos architektūra
 
