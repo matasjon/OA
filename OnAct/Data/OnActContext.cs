@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using OnAct.Auth.Model;
 using OnAct.Data.Entities;
 
 namespace OnAct.Data
 {
-    public class OnActContext : DbContext
+    public class OnActContext : IdentityDbContext<OnActUser>
     {
         
         public DbSet<Activity> Activities { get; set; }

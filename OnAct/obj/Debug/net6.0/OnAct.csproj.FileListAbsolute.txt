@@ -58,3 +58,10 @@ E:\stud4\STTP\OnAct\OnAct\obj\Debug\net6.0\refint\OnAct.dll
 E:\stud4\STTP\OnAct\OnAct\obj\Debug\net6.0\OnAct.pdb
 E:\stud4\STTP\OnAct\OnAct\obj\Debug\net6.0\OnAct.genruntimeconfig.cache
 E:\stud4\STTP\OnAct\OnAct\obj\Debug\net6.0\ref\OnAct.dll
+E:\stud4\STTP\OnAct\OnAct\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\stud4\STTP\OnAct\OnAct\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\stud4\STTP\OnAct\OnAct\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\stud4\STTP\OnAct\OnAct\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+E:\stud4\STTP\OnAct\OnAct\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+E:\stud4\STTP\OnAct\OnAct\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+E:\stud4\STTP\OnAct\OnAct\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
