@@ -12,7 +12,7 @@ using OnAct.Data.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-builder.Services.AddIdentity<OnActUser, IdentityRole>().AddEntityFrameworkStores<OnActContext>()  //adminas/creator/manager/user // video 16 min
+builder.Services.AddIdentity<OnActUser, IdentityRole>().AddEntityFrameworkStores<OnActContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddDbContext<OnActContext>();
@@ -48,11 +48,17 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy(PolicyNames.ResourceOwner, policy => policy.Requirements.Add(new ResourceOwnerRequirement()));
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CreatorRights", policy =>
+        policy.RequireRole(OnActRoles.Admin, OnActRoles.ActivityCreator));
+});
+
 builder.Services.AddSingleton<IAuthorizationHandler, ResourceOwnerAuthorizationHandler>();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World two!");
+app.MapGet("/", () => "OnAct website");
 
 if (!app.Environment.IsDevelopment())
 {

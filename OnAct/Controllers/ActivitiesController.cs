@@ -43,11 +43,12 @@ namespace OnAct.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = OnActRoles.User)] // cia dadeta
+        [Authorize(Policy = "CreatorRights")] // cia dadeta
         public async Task<ActionResult<ActivityDto>> Post(CreateActivityDto activityDto)
         {
             var activity = _mapper.Map<Activity>(activityDto);
             activity.CreationTimeUt = DateTime.UtcNow;
+
             activity.UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub); // cia dadeta
 
             await _activitiesRepository.Create(activity);
@@ -58,7 +59,7 @@ namespace OnAct.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = OnActRoles.User)] // cia dadeta
+        [Authorize(Policy = "CreatorRights")] // cia dadeta
         public async Task<ActionResult<ActivityDto>> Put(int id, UpdateActivityDto activityDto)
         {
             var activity = await _activitiesRepository.Get(id);
@@ -86,10 +87,20 @@ namespace OnAct.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "CreatorRights")]
         public async Task<ActionResult<ActivityDto>> Delete(int id)
         {
             var activity = await _activitiesRepository.Get(id);
             if (activity == null) return NotFound($"Activity with id '{id}' not found.");
+
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, activity, PolicyNames.ResourceOwner);
+
+            if (!authorizationResult.Succeeded)
+            {
+                //404
+                return Forbid();
+            }
 
             await _activitiesRepository.Delete(activity);
 

@@ -1,5 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.JsonWebTokens;
+using OnAct.Auth.Model;
 using OnAct.Data.Dtos.Places;
 using OnAct.Data.Entities;
 using OnAct.Data.Repositories;
@@ -14,13 +18,15 @@ namespace OnAct.Controllers
         private readonly IPlacesRepository _placesRepository;
         private readonly IMapper _mapper;
         private readonly IActivitiesRepository _activitiesRepository;
+        private readonly IAuthorizationService _authorizationService;
 
         public PlacesController(IPlacesRepository placesRepository, IMapper mapper,
-            IActivitiesRepository activitiesRepository)
+            IActivitiesRepository activitiesRepository, IAuthorizationService authorizationService)
         {
             _placesRepository = placesRepository;
             _mapper = mapper;
             _activitiesRepository = activitiesRepository;
+            _authorizationService = authorizationService;
         }
 
 
@@ -45,12 +51,21 @@ namespace OnAct.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "CreatorRights")]
         public async Task<ActionResult<PlaceDto>> PostAsync(int activityId, CreatePlaceDto placeDto)
         {
             var activity = await _activitiesRepository.Get(activityId);
 
             if (activity == null) return NotFound($"Activity with id '{activityId}' not found.");
-            
+
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, activity, PolicyNames.ResourceOwner);
+
+            if (!authorizationResult.Succeeded)
+            {
+                //404
+                return Forbid();
+            }
 
             var place = _mapper.Map<Place>(placeDto);
             place.ActivityId = activityId;
@@ -62,6 +77,7 @@ namespace OnAct.Controllers
         }
 
         [HttpPut("{placeId}")]
+        [Authorize(Policy = "CreatorRights")]
         public async Task<ActionResult<PlaceDto>> PutAsync(int activityId, int placeId, UpdatePlaceDto placeDto)
         {
             var activity = await _activitiesRepository.Get(activityId);
@@ -69,6 +85,14 @@ namespace OnAct.Controllers
 
             var oldPlace = await _placesRepository.Get(activityId, placeId);
             if (oldPlace == null) return NotFound($"Place with id '{placeId}' not found in activity with id '{activityId}'.");
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, activity, PolicyNames.ResourceOwner);
+
+            if (!authorizationResult.Succeeded)
+            {
+                //404
+                return Forbid();
+            }
 
             //oldPost.Body = postDto.Body;
             _mapper.Map(placeDto, oldPlace);
@@ -79,6 +103,7 @@ namespace OnAct.Controllers
         }
 
         [HttpDelete("{placeId}")]
+        [Authorize(Policy = "CreatorRights")]
         public async Task<ActionResult> DeleteAsync(int activityId, int placeId)
         {
             var activity = await _activitiesRepository.Get(activityId);
@@ -87,6 +112,14 @@ namespace OnAct.Controllers
 
             var place = await _placesRepository.Get(activityId, placeId);
             if (place == null) return NotFound($"Place with id '{placeId}' not found in activity with id '{activityId}'.");
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, activity, PolicyNames.ResourceOwner);
+
+            if (!authorizationResult.Succeeded)
+            {
+                //404
+                return Forbid();
+            }
 
             await _placesRepository.Delete(place);
 

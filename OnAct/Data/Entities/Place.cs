@@ -1,4 +1,7 @@
-﻿namespace OnAct.Data.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using OnAct.Auth.Model;
+
+namespace OnAct.Data.Entities
 {
     public class Place
     {
@@ -10,5 +13,6 @@
 
         public int ActivityId { get; set; }
         public Activity Activity { get; set; }
+
     }
 }

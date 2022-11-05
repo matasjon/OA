@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using OnAct.Auth.Model;
 
 namespace OnAct.Data.Entities
 {
@@ -29,6 +30,9 @@ namespace OnAct.Data.Entities
 
         public int PlaceId { get; set; }
         public Place Place { get; set; }
+
+        // identity manager or 
+
 
     }
 }
