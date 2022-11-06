@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="OnAct" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^E:\\stud4\\STTP\\OnAct\\OnAct\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="OnAct.Data.OnActContext" description="" value="Host=onactdb.postgres.database.azure.com; Database=onact; Username=postgresadmin@onactdb; Password=slap789*" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^E:\\stud4\\STTP\\OnAct\\OnAct\\obj\\Release\\net6\.0\\PubTmp\\EFSQLScripts\\OnAct\.Data\.OnActContext\.sql$" />
+  </parameter>
+</parameters>
