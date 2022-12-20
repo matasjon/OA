@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnAct.Auth;
 using OnAct.Auth.Model;
+using System.Data;
 
 namespace OnAct.Controllers
 {
@@ -64,6 +65,5 @@ namespace OnAct.Controllers
 
             return Ok(new SuccessfulLoginDto(accessToken));
         }
-
     }
 }

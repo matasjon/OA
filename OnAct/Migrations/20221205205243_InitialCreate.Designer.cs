@@ -12,7 +12,7 @@ using OnAct.Data;
 namespace OnAct.Migrations
 {
     [DbContext(typeof(OnActContext))]
-    [Migration("20221106142316_InitialCreate")]
+    [Migration("20221205205243_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
